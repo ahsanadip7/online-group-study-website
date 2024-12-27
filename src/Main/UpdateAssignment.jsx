@@ -1,19 +1,18 @@
-import React, { useContext, useState } from 'react';
-import { FaPlusCircle } from "react-icons/fa";
-import Swal from 'sweetalert2';
+import React, { useState } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { AuthContext } from '../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
-// Import DatePicker
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+const UpdateAssignment = () => {
 
-const CreateAssignment = () => {
-    const { user } = useContext(AuthContext);
-  
+    const assignment = useLoaderData()
+    console.log(assignment);
+    const { thumbnailUrl, title, description, difficultyLevel , _id} = assignment
+    const navigate = useNavigate()
     // State for form data
     const [formData, setFormData] = useState({
-        thumbnailUrl: "",
+        thumbnail: "",
         title: "",
         difficultyLevel: "easy", // Default to easy
         description: "",
@@ -26,48 +25,47 @@ const CreateAssignment = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    // Handle date change
-    const handleDateChange = (date) => {
-        setFormData({ ...formData, deadline: date });
-    };
+  
 
     // Submit form
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
-        const { thumbnailUrl, title, description, difficultyLevel, dueDate } = formData;
-        const email = user?.email;
-        const name = user?.displayName;
+        console.log(e.target.difficultyLevel.value);
 
-        const addAssignment = { 
-            thumbnailUrl, 
-            difficultyLevel, 
-            title, 
-            description, 
-            dueDate: dueDate.toISOString(), // Store dueDate as ISO string
-            email, 
-            name 
+        const form = e.target;
+        const difficultyLevel = form.difficultyLevel.value;
+        const description = form.description.value;
+        const thumbnailUrl = form.thumbnailUrl.value;
+        const title = form.title.value;
+
+        const addAssignment = {
+            thumbnailUrl,
+            difficultyLevel,
+            title,
+            description
         };
 
         console.log(addAssignment);
 
-        fetch('http://localhost:5000/assignmentCollection', {
-            method: 'POST',
+        fetch(`http://localhost:5000/assignmentCollection/${_id}`, {
+            method: 'PUT',
             headers: {
                 "content-type": "application/json"
             },
             body: JSON.stringify(addAssignment)
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.insertedId) {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Assignment added successfully',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                });
-            }
-        });
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Assignment added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    });
+                    navigate('/assignments')
+                }
+            });
     };
 
     return (
@@ -97,7 +95,7 @@ const CreateAssignment = () => {
                         <FaPlusCircle className="text-lime-600" />
                         Add A Assignment
                     </h2>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleUpdate} className="space-y-4">
 
                         {/* Title */}
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.4 }}>
@@ -105,7 +103,7 @@ const CreateAssignment = () => {
                             <input
                                 type="text"
                                 name="title"
-                                value={formData.title}
+                                defaultValue={title}
                                 onChange={handleChange}
                                 placeholder="Enter assignment title"
                                 className="input input-bordered w-full"
@@ -119,7 +117,7 @@ const CreateAssignment = () => {
                             <input
                                 type="url"
                                 name="description"
-                                value={formData.description}
+                                defaultValue={description}
                                 onChange={handleChange}
                                 placeholder="Enter assignment details"
                                 className="input input-bordered w-full"
@@ -127,13 +125,13 @@ const CreateAssignment = () => {
                             />
                         </motion.div>
 
-                        {/* Thumbnail */}
+                        {/* thumbnailUrl */}
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }}>
-                            <label className="block font-medium mb-2">Image/Thumbnail URL</label>
+                            <label className="block font-medium mb-2">Image/thumbnailUrl URL</label>
                             <input
                                 type="url"
                                 name="thumbnailUrl"
-                                value={formData.thumbnailUrl}
+                                defaultValue={thumbnailUrl}
                                 onChange={handleChange}
                                 placeholder="Enter image URL"
                                 className="input input-bordered w-full"
@@ -146,7 +144,7 @@ const CreateAssignment = () => {
                             <label className="block font-medium mb-2">Assignment Difficulty Level</label>
                             <select
                                 name="difficultyLevel"
-                                value={formData.difficultyLevel}
+                                defaultValue={difficultyLevel}
                                 onChange={handleChange}
                                 className="select select-bordered w-full"
                                 required
@@ -157,19 +155,7 @@ const CreateAssignment = () => {
                             </select>
                         </motion.div>
 
-                        {/* Deadline with Date Picker */}
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.2 }}>
-                            <label className="block font-medium mb-2">Deadline</label>
-                            <DatePicker
-                                selected={formData.dueDate}
-                                onChange={handleDateChange}
-                                dateFormat="yyyy-MM-dd"
-                                minDate={new Date()} // Prevent past dates
-                                isClearable
-                                placeholderText="Select a dueDate"
-                                className="input input-bordered w-full"
-                            />
-                        </motion.div>
+                      
 
                         {/* Submit Button */}
                         <motion.button
@@ -185,6 +171,6 @@ const CreateAssignment = () => {
             </div>
         </div>
     );
-};
+}
 
-export default CreateAssignment;
+export default UpdateAssignment;

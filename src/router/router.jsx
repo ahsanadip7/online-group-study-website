@@ -5,6 +5,8 @@ import Main from "../Main/Main";
 import Login from "../Authentication/LogIn";
 import SignUp from "../Authentication/SignUp";
 import CreateAssignment from "../Main/PrivateRouts/CreateAssignment";
+import Assignments from "../Main/Assignments";
+import UpdateAssignment from "../Main/UpdateAssignment";
 
 
 
@@ -24,7 +26,17 @@ import CreateAssignment from "../Main/PrivateRouts/CreateAssignment";
         {
             path: 'createAssignment',
             element: <CreateAssignment></CreateAssignment>
-        }
+        },
+        {
+            path:'assignments',
+            element:<Assignments></Assignments>,
+            loader: () => fetch('http://localhost:5000/assignmentCollection')
+        },
+       {
+        path:'updateAssignment/:id',
+        element: <UpdateAssignment></UpdateAssignment>,
+        loader: ({params}) => fetch(`http://localhost:5000/assignmentCollection/${params.id}`)
+       }
      ]
     },
   ]);
