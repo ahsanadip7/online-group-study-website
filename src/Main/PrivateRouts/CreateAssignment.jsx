@@ -17,6 +17,7 @@ const CreateAssignment = () => {
         title: "",
         difficultyLevel: "easy", // Default to easy
         description: "",
+        marks: "", // Added marks field
         dueDate: new Date(), // Default dueDate is today's date
     });
 
@@ -28,13 +29,13 @@ const CreateAssignment = () => {
 
     // Handle date change
     const handleDateChange = (date) => {
-        setFormData({ ...formData, deadline: date });
+        setFormData({ ...formData, dueDate: date });
     };
 
     // Submit form
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { thumbnailUrl, title, description, difficultyLevel, dueDate } = formData;
+        const { thumbnailUrl, title, description, difficultyLevel, marks, dueDate } = formData;
         const email = user?.email;
         const name = user?.displayName;
 
@@ -43,6 +44,7 @@ const CreateAssignment = () => {
             difficultyLevel, 
             title, 
             description, 
+            marks, // Include marks
             dueDate: dueDate.toISOString(), // Store dueDate as ISO string
             email, 
             name 
@@ -122,6 +124,20 @@ const CreateAssignment = () => {
                                 value={formData.description}
                                 onChange={handleChange}
                                 placeholder="Enter assignment details"
+                                className="input input-bordered w-full"
+                                required
+                            />
+                        </motion.div>
+
+                        {/* Marks */}
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.7 }}>
+                            <label className="block font-medium mb-2">Marks</label>
+                            <input
+                                type="number"
+                                name="marks"
+                                value={formData.marks}
+                                onChange={handleChange}
+                                placeholder="Enter assignment marks"
                                 className="input input-bordered w-full"
                                 required
                             />

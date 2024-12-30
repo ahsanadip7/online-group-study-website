@@ -62,11 +62,6 @@ const Assignments = () => {
     };
 
 
-    const handleUpdate = (id) => {
-        console.log('Update assignment with id:', id);
-        // Add navigation or modal logic for updating assignment
-    };
-
     const handleView = (id) => {
         console.log('View assignment with id:', id);
         // Add navigation logic for viewing assignment details
@@ -82,11 +77,13 @@ const Assignments = () => {
                         <p className="text-gray-600 mb-2">Marks: {assignment.marks}</p>
                         <p className="text-gray-600 mb-2">Difficulty: {assignment.difficultyLevel}</p>
                         <div className="flex justify-between mt-4">
+                            <Link to={`/viewDetails/${assignment._id}`}>
                             <button
                                 onClick={() => handleView(assignment._id)}
                                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                                 View
                             </button>
+                            </Link>
                             <Link to={`/updateAssignment/${assignment._id}`}>
                                 <button
                                     className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
