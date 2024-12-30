@@ -10,6 +10,8 @@ import UpdateAssignment from "../Main/UpdateAssignment";
 import Home from "../Main/Home";
 import ViewDetails from "../Main/ViewDetails";
 import MySubmitted from "../Main/PrivateRouts/MySubmitted";
+import PendingAssignment from "../Main/PrivateRouts/PendingAssignment";
+import Mark from "../Main/PrivateRouts/Mark";
 
 
 
@@ -53,6 +55,17 @@ const router = createBrowserRouter([
                 path:'mySubmissions',
                 element: <MySubmitted></MySubmitted>,
                 loader: () => fetch('http://localhost:5000/assignmentCollection')
+            },
+            {
+                path:'pendingAssignment',
+                element: <PendingAssignment></PendingAssignment>,
+                loader: () => fetch('http://localhost:5000/submissions')
+            },
+            {
+                path:'mark/:id',
+                element: <Mark></Mark>,
+                loader: ({ params }) => fetch(`http://localhost:5000/submissions/${params.id}`)
+
             }
         ]
     },

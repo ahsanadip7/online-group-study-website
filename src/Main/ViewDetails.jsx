@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { AuthContext } from './AuthProvider/AuthProvider';
 
 const ViewDetails = () => {
+    const {user} =useContext(AuthContext)
     const assignment = useLoaderData(); // Load data passed through React Router
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -28,10 +30,12 @@ const ViewDetails = () => {
     const handleSubmitAssignment = () => {
         const submissionData = {
             assignmentId: assignment._id,
+            assignmentTitle: assignment.title,
+            marks: assignment.marks,
             submissionLink,
             quickNote,
             status: 'pending',
-            submittedBy: email, // Capture user's email
+            submittedBy: user.email, // Capture user's email
         };
 
         fetch('http://localhost:5000/submissions', {

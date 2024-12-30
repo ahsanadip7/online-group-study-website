@@ -24,7 +24,7 @@ const NavBar = () => {
     {
         user ? ( <>
         <NavLink to='/createAssignment'><li>Create Assignment</li></NavLink>
-        <NavLink to='/pendingAssignments'><li>Pending Assignments</li></NavLink>
+        <NavLink to='/pendingAssignment'><li>Pending Assignments</li></NavLink>
         <NavLink to='/mySubmissions'><li>My Submissions</li></NavLink>
         </>
         ) : (
