@@ -7,6 +7,7 @@ import AuthProvider from './Main/AuthProvider/AuthProvider'
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./global.css"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

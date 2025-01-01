@@ -1,0 +1,38 @@
+/* global.css */
+
+/* General body styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;  /* Smooth transition */
+}
+
+/* Light theme default */
+body {
+    background-color: white;
+    color: black;
+}
+
+/* Dark theme */
+body.dark {
+    background-color: #121212;
+    color: white;
+}
+
+/* Add other global styles for elements here */
+button {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Example: Make links different in dark mode */
+a {
+    color: blue;
+}
+
+body.dark a {
+    color: lightblue;
+}

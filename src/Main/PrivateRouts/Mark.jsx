@@ -6,18 +6,22 @@ const Mark = () => {
     const markAssignment = useLoaderData()
     console.log(markAssignment);
     const id = markAssignment._id
+
+    
     const handleCompleted = (e) => {
         e.preventDefault()
         const form = e.target
+        const obtainedMarks = form.mark.value
         const status = form.status.value
         console.log(status);
+        const marked = { obtainedMarks, status}
             
             fetch(`http://localhost:5000/submissions/${id}`, {
                 method: 'PUT',
                 headers: {
                     "content-type": "application/json",
                 },
-                body: JSON.stringify({ status}),
+                body: JSON.stringify(marked),
             })
                 .then(res => res.json())
                 .then(data => {

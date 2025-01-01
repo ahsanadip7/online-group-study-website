@@ -32,9 +32,44 @@ const CreateAssignment = () => {
         setFormData({ ...formData, dueDate: date });
     };
 
+    // Validate form data
+    const validateForm = () => {
+        const { title, description, marks, thumbnailUrl, dueDate } = formData;
+
+        if (!title.trim()) {
+            Swal.fire('Error', 'Title is required.', 'error');
+            return false;
+        }
+
+        if (!description.trim()) {
+            Swal.fire('Error', 'Description is required.', 'error');
+            return false;
+        }
+
+        if (!marks || marks <= 0) {
+            Swal.fire('Error', 'Marks must be a positive number.', 'error');
+            return false;
+        }
+
+        if (!thumbnailUrl.trim() || !/^https?:\/\//.test(thumbnailUrl)) {
+            Swal.fire('Error', 'Please provide a valid URL for the thumbnail.', 'error');
+            return false;
+        }
+
+        if (!dueDate || new Date(dueDate) < new Date()) {
+            Swal.fire('Error', 'Please select a valid future due date.', 'error');
+            return false;
+        }
+
+        return true;
+    };
+
     // Submit form
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!validateForm()) return; // Validate before submission
+
         const { thumbnailUrl, title, description, difficultyLevel, marks, dueDate } = formData;
         const email = user?.email;
         const name = user?.displayName;
@@ -88,7 +123,7 @@ const CreateAssignment = () => {
             </motion.div>
 
             {/* Form Section */}
-            <div className="bg-gray-300 py-12">
+            <div className=" py-12 text-black">
                 <motion.div
                     className="max-w-3xl mx-auto my-10 p-8 bg-white shadow-lg rounded-lg"
                     initial={{ opacity: 0 }}
@@ -119,7 +154,7 @@ const CreateAssignment = () => {
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.6 }}>
                             <label className="block font-medium mb-2">Description</label>
                             <input
-                                type="url"
+                                type="text"
                                 name="description"
                                 value={formData.description}
                                 onChange={handleChange}

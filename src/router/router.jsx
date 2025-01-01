@@ -12,6 +12,7 @@ import ViewDetails from "../Main/ViewDetails";
 import MySubmitted from "../Main/PrivateRouts/MySubmitted";
 import PendingAssignment from "../Main/PrivateRouts/PendingAssignment";
 import Mark from "../Main/PrivateRouts/Mark";
+import HelpPage from "../Main/HelpPage";
 
 
 
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
                 element: <Mark></Mark>,
                 loader: ({ params }) => fetch(`http://localhost:5000/submissions/${params.id}`)
 
+            },
+            {
+                path: 'helpPage',
+                element: <HelpPage></HelpPage>
             }
         ]
     },
