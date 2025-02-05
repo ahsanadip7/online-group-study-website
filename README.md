@@ -28,12 +28,14 @@ sh
 Copy
 Edit
 npm install
+
 3. Run the development server:
 
 sh
 Copy
 Edit
 npm run dev
+
 4. Open in Browser:
 Open http://localhost:5173 in your browser.
 
