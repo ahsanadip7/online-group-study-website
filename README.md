@@ -43,9 +43,9 @@ Open http://localhost:5173 in your browser.
 🎨 UI Preview
 
 🏠 Home Page
-![Home Page](screenshots/homepage.png)
+![Home Page](https://assignment-11-57128.web.app/screenshots/homepage.png)
 📋 Study Group Create Assignment
-![Create Assignment](screenshots/createassignmentpage.png)
+![Create Assignment](https://assignment-11-57128.web.app/screenshots/createassignmentpage.png)
 📅 Study Session Page
 ![Assignments page](screenshots/assignmentspage.png)
 🔗 Live Demo
