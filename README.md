@@ -17,23 +17,24 @@ A web-based platform designed to facilitate group study sessions, allowing users
 - 🖼 **React Icons** – Icon library for better UI/UX
 
 ## 📂 Installation & Setup
+
 1. **Clone the repository:**
    ```sh
    git clone https://github.com/ahsanadip7/online-group-study-website.git
    cd online-group-study-website
-
-Install dependencies:
+2. Install dependencies:
 
 sh
 Copy
 Edit
 npm install
-Run the development server:
+3. Run the development server:
 
 sh
 Copy
 Edit
 npm run dev
+4. Open in Browser:
 Open http://localhost:5173 in your browser.
 
 🎨 UI Preview
