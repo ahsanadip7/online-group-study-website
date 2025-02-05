@@ -41,6 +41,7 @@ npm run dev
 Open http://localhost:5173 in your browser.
 
 🎨 UI Preview
+
 🏠 Home Page
 ![Home Page](screenshots/homepage.png)
 📋 Study Group Create Assignment
@@ -48,6 +49,10 @@ Open http://localhost:5173 in your browser.
 📅 Study Session Page
 ![Assignments page](screenshots/assignmentspage.png)
 🔗 Live Demo
+- [View Online](https://assignment-11-57128.web.app)
+
+(Insert screenshots or a demo link here)
+## 🔗 Live Demo
 - [View Online](https://assignment-11-57128.web.app)
 📌 Contributing
 Contributions are welcome! If you'd like to improve the platform, feel free to fork the repo and submit a pull request.
