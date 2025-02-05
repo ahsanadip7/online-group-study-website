@@ -15,7 +15,7 @@ const Assignments = () => {
 
     // Fetch assignments
     useEffect(() => {
-        fetch('http://localhost:5000/assignmentCollection')
+        fetch('https://assignment-11-server-side-nine.vercel.app/assignmentCollection')
             .then(res => res.json())
             .then(data => {
                 setAssignments(data);
@@ -39,7 +39,7 @@ const Assignments = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 if (user.email === email) {
-                    fetch(`http://localhost:5000/assignmentCollection/${_id}`, {
+                    fetch(`https://assignment-11-server-side-nine.vercel.app/assignmentCollection/${_id}`, {
                         method: "DELETE",
                     })
                         .then(res => res.json())

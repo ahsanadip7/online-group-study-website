@@ -47,7 +47,7 @@ const UpdateAssignment = () => {
 
         console.log(addAssignment);
 
-        fetch(`http://localhost:5000/assignmentCollection/${_id}`, {
+        fetch(`https://assignment-11-server-side-nine.vercel.app/assignmentCollection/${_id}`, {
             method: 'PUT',
             headers: {
                 "content-type": "application/json"

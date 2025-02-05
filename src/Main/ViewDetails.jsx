@@ -38,7 +38,7 @@ const ViewDetails = () => {
             submittedBy: user.email, // Capture user's email
         };
 
-        fetch('http://localhost:5000/submissions', {
+        fetch('https://assignment-11-server-side-nine.vercel.app/submissions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

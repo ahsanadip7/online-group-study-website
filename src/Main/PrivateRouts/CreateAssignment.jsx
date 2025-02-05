@@ -87,7 +87,7 @@ const CreateAssignment = () => {
 
         console.log(addAssignment);
 
-        fetch('http://localhost:5000/assignmentCollection', {
+        fetch('https://assignment-11-server-side-nine.vercel.app/assignmentCollection', {
             method: 'POST',
             headers: {
                 "content-type": "application/json"

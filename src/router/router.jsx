@@ -40,32 +40,32 @@ const router = createBrowserRouter([
             {
                 path: 'assignments',
                 element: <Assignments></Assignments>,
-                loader: () => fetch('http://localhost:5000/assignmentCollection')
+                loader: () => fetch('https://assignment-11-server-side-nine.vercel.app/assignmentCollection')
             },
             {
                 path: 'updateAssignment/:id',
                 element: <UpdateAssignment></UpdateAssignment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/assignmentCollection/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment-11-server-side-nine.vercel.app/assignmentCollection/${params.id}`)
             },
             {
                 path:'viewDetails/:id',
                 element: <ViewDetails></ViewDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/assignmentCollection/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment-11-server-side-nine.vercel.app/assignmentCollection/${params.id}`)
             },
             {
                 path:'mySubmissions',
                 element: <MySubmitted></MySubmitted>,
-                loader: () => fetch('http://localhost:5000/assignmentCollection')
+                loader: () => fetch('https://assignment-11-server-side-nine.vercel.app/assignmentCollection')
             },
             {
                 path:'pendingAssignment',
                 element: <PendingAssignment></PendingAssignment>,
-                loader: () => fetch('http://localhost:5000/submissions')
+                loader: () => fetch('https://assignment-11-server-side-nine.vercel.app/submissions')
             },
             {
                 path:'mark/:id',
                 element: <Mark></Mark>,
-                loader: ({ params }) => fetch(`http://localhost:5000/submissions/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment-11-server-side-nine.vercel.app/submissions/${params.id}`)
 
             },
             {

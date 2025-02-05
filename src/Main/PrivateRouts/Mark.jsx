@@ -16,7 +16,7 @@ const Mark = () => {
         console.log(status);
         const marked = { obtainedMarks, status}
             
-            fetch(`http://localhost:5000/submissions/${id}`, {
+            fetch(`https://assignment-11-server-side-nine.vercel.app/submissions/${id}`, {
                 method: 'PUT',
                 headers: {
                     "content-type": "application/json",
