@@ -1,8 +1,42 @@
-# React + Vite
+# 📚 Online Group Study Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web-based platform designed to facilitate group study sessions, allowing users to collaborate, share resources, and communicate effectively.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- 📌 Create and join study groups
+- 🗂 Organize study materials and resources
+- 💬 Real-time discussion and Q&A
+- 📅 Schedule study sessions
+- 🎨 Responsive and user-friendly UI
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack
+- ⚛ **React** – Frontend framework
+- 🔀 **React Router** – Navigation management
+- 🎨 **Tailwind CSS** – Styling framework
+- 🌸 **DaisyUI** – Pre-built UI components
+- 🖼 **React Icons** – Icon library for better UI/UX
+
+## 📂 Installation & Setup
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+Install dependencies:
+
+sh
+Copy
+Edit
+npm install
+Run the development server:
+
+sh
+Copy
+Edit
+npm run dev
+Open http://localhost:5173 in your browser.
+
+🎨 UI Preview
+(Insert screenshots or a demo link here)
+
+📌 Contributing
+Contributions are welcome! If you'd like to improve the platform, feel free to fork the repo and submit a pull request.
