@@ -40,18 +40,7 @@ npm run dev
 4. Open in Browser:
 Open http://localhost:5173 in your browser.
 
-🎨 UI Preview
 
-🏠 Home Page
-![Home Page](https://assignment-11-57128.web.app/screenshots/homepage.png)
-📋 Study Group Create Assignment
-![Create Assignment](https://assignment-11-57128.web.app/screenshots/createassignmentpage.png)
-📅 Study Session Page
-![Assignments page](screenshots/assignmentspage.png)
-🔗 Live Demo
-- [View Online](https://assignment-11-57128.web.app)
-
-(Insert screenshots or a demo link here)
 ## 🔗 Live Demo
 - [View Online](https://assignment-11-57128.web.app)
 📌 Contributing
