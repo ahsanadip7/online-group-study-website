@@ -5,11 +5,10 @@ import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
 
 const UpdateAssignment = () => {
+    const assignment = useLoaderData();
+    const { thumbnailUrl, title, description, difficultyLevel, _id } = assignment;
+    const navigate = useNavigate();
 
-    const assignment = useLoaderData()
-    console.log(assignment);
-    const { thumbnailUrl, title, description, difficultyLevel , _id} = assignment
-    const navigate = useNavigate()
     // State for form data
     const [formData, setFormData] = useState({
         thumbnail: "",
@@ -25,12 +24,9 @@ const UpdateAssignment = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-  
-
     // Submit form
     const handleUpdate = (e) => {
         e.preventDefault();
-        console.log(e.target.difficultyLevel.value);
 
         const form = e.target;
         const difficultyLevel = form.difficultyLevel.value;
@@ -45,8 +41,6 @@ const UpdateAssignment = () => {
             description
         };
 
-        console.log(addAssignment);
-
         fetch(`https://assignment-11-server-side-nine.vercel.app/assignmentCollection/${_id}`, {
             method: 'PUT',
             headers: {
@@ -59,11 +53,11 @@ const UpdateAssignment = () => {
                 if (data.modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Assignment added successfully',
+                        text: 'Assignment updated successfully',
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     });
-                    navigate('/assignments')
+                    navigate('/assignments');
                 }
             });
     };
@@ -72,81 +66,98 @@ const UpdateAssignment = () => {
         <div>
             {/* Banner Section */}
             <motion.div
-                className="relative bg-cover bg-center h-64"
-                style={{ backgroundImage: "url('https://via.placeholder.com/1920x400?text=Add+New+Assignment')" }}
+                className="relative bg-cover bg-center h-64 dark:bg-gray-800"
+                style={{ backgroundImage: "url('https://via.placeholder.com/1920x400?text=Update+Assignment')" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}>
+                transition={{ duration: 1 }}
+            >
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
                 <div className="relative h-full flex items-center justify-center text-center text-white px-4">
-                    <h1 className="text-3xl md:text-5xl font-bold">Launch Your Assignment</h1>
+                    <h1 className="text-3xl md:text-5xl font-bold">Update Your Assignment</h1>
                 </div>
             </motion.div>
 
             {/* Form Section */}
-            <div className="bg-gray-300 py-12">
+            <div className="bg-gray-300 py-12 dark:bg-gray-900">
                 <motion.div
-                    className="max-w-3xl mx-auto my-10 p-8 bg-white shadow-lg rounded-lg"
+                    className="max-w-3xl mx-auto my-10 p-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                 >
-                    <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-gray-800 dark:text-white">
                         <FaPlusCircle className="text-lime-600" />
-                        Add A Assignment
+                        Update Assignment
                     </h2>
-                    <form onSubmit={handleUpdate} className="space-y-4">
+                    <form onSubmit={handleUpdate} className="space-y-6">
 
                         {/* Title */}
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.4 }}>
-                            <label className="block font-medium mb-2">Assignment Title</label>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1, delay: 0.4 }}
+                        >
+                            <label className="block font-medium mb-2 text-gray-800 dark:text-white">Assignment Title</label>
                             <input
                                 type="text"
                                 name="title"
                                 defaultValue={title}
                                 onChange={handleChange}
                                 placeholder="Enter assignment title"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full dark:bg-gray-700 dark:text-white"
                                 required
                             />
                         </motion.div>
 
                         {/* Description */}
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.6 }}>
-                            <label className="block font-medium mb-2">Description</label>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1, delay: 0.6 }}
+                        >
+                            <label className="block font-medium mb-2 text-gray-800 dark:text-white">Description</label>
                             <input
                                 type="url"
                                 name="description"
                                 defaultValue={description}
                                 onChange={handleChange}
                                 placeholder="Enter assignment details"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full dark:bg-gray-700 dark:text-white"
                                 required
                             />
                         </motion.div>
 
-                        {/* thumbnailUrl */}
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }}>
-                            <label className="block font-medium mb-2">Image/thumbnailUrl URL</label>
+                        {/* Thumbnail URL */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1, delay: 0.8 }}
+                        >
+                            <label className="block font-medium mb-2 text-gray-800 dark:text-white">Image/Thumbnail URL</label>
                             <input
                                 type="url"
                                 name="thumbnailUrl"
                                 defaultValue={thumbnailUrl}
                                 onChange={handleChange}
                                 placeholder="Enter image URL"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full dark:bg-gray-700 dark:text-white"
                                 required
                             />
                         </motion.div>
 
                         {/* Difficulty Level */}
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1 }}>
-                            <label className="block font-medium mb-2">Assignment Difficulty Level</label>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1, delay: 1 }}
+                        >
+                            <label className="block font-medium mb-2 text-gray-800 dark:text-white">Assignment Difficulty Level</label>
                             <select
                                 name="difficultyLevel"
                                 defaultValue={difficultyLevel}
                                 onChange={handleChange}
-                                className="select select-bordered w-full"
+                                className="select select-bordered w-full dark:bg-gray-700 dark:text-white"
                                 required
                             >
                                 <option value="easy">Easy</option>
@@ -155,22 +166,21 @@ const UpdateAssignment = () => {
                             </select>
                         </motion.div>
 
-                      
-
                         {/* Submit Button */}
                         <motion.button
                             type="submit"
                             className="btn btn-primary w-full"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ duration: 1, delay: 1.8 }}>
-                            Add Assignment
+                            transition={{ duration: 1, delay: 1.8 }}
+                        >
+                            Update Assignment
                         </motion.button>
                     </form>
                 </motion.div>
             </div>
         </div>
     );
-}
+};
 
 export default UpdateAssignment;

@@ -13,6 +13,7 @@ import MySubmitted from "../Main/PrivateRouts/MySubmitted";
 import PendingAssignment from "../Main/PrivateRouts/PendingAssignment";
 import Mark from "../Main/PrivateRouts/Mark";
 import HelpPage from "../Main/HelpPage";
+import ErrorPage from "../ErrorPage";
 
 
 
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
             {
                 path: 'helpPage',
                 element: <HelpPage></HelpPage>
+            },
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>
             }
         ]
     },

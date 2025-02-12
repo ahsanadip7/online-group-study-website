@@ -1,25 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Banner from './HomeComponent/Banner';
 import Feature from './HomeComponent/Feature';
 import Faq from './HomeComponent/Faq';
-import { AuthContext } from './AuthProvider/AuthProvider';
+import ReviewSection from './HomeComponent/ReviewSection';
+import GiveReview from './HomeComponent/GIveReview';
 
 const Home = () => {
-    const { toggleTheme, isDarkMode } = useContext(AuthContext);
+    
 
     return (
-        <div>
-            <div className='flex justify-end'>
-            <button
-                onClick={toggleTheme}
-                className="p-2 rounded bg-gray-200 m-2  dark:bg-gray-800 dark:text-white"
-            >
-                {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            </button>
-            </div>
+       <div>
             <Banner />
             <Feature />
             <Faq />
+            <ReviewSection />
+            <GiveReview />
         </div>
     );
 };

@@ -9,7 +9,7 @@ const MySubmitted = () => {
     const userSubmissions = submissions.filter(submission => submission.email === user?.email)
 
     return (
-        <div>
+        <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
             {/* Banner Section */}
             <div
                 className="relative bg-cover bg-center h-64"
@@ -24,9 +24,9 @@ const MySubmitted = () => {
             <div className="container mx-auto px-4 py-8">
                 <h2 className="text-2xl font-bold mb-6 text-center">My Assignments</h2>
                 <div className="overflow-x-auto shadow-lg rounded-lg">
-                    <table className="table-auto w-full border-collapse border border-gray-300">
+                    <table className="table-auto w-full border-collapse border border-gray-300 dark:border-gray-700">
                         <thead>
-                            <tr className="bg-gray-200 text-gray-700">
+                            <tr className="bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
                                 <th className="border border-gray-300 px-4 py-2">Title</th>
                                 <th className="border border-gray-300 px-4 py-2">Status</th>
                                 <th className="border border-gray-300 px-4 py-2">Marks</th>
@@ -36,12 +36,12 @@ const MySubmitted = () => {
                         </thead>
                         <tbody>
                             {userSubmissions.map((submission, index) => (
-                                <tr key={index} className="text-center hover:bg-gray-100">
+                                <tr key={index} className="text-center hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <td className="border border-gray-300 px-4 py-2">{submission.title}</td>
                                     <td className="border border-gray-300 px-4 py-2 text-indigo-500 font-medium">{submission.difficultyLevel}</td>
                                     <td className="border border-gray-300 px-4 py-2">{submission.marks}</td>
                                     <td className="border border-gray-300 px-4 py-2 text-green-500 font-medium">{submission.obtainedMarks || 'N/A'}</td>
-                                    <td className="border border-gray-300 px-4 py-2 text-gray-600">{submission.feedback || 'N/A'}</td>
+                                    <td className="border border-gray-300 px-4 py-2 text-gray-600 dark:text-gray-300">{submission.feedback || 'N/A'}</td>
                                 </tr>
                             ))}
                         </tbody>

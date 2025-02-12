@@ -108,7 +108,7 @@ const CreateAssignment = () => {
     };
 
     return (
-        <div>
+        <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
             {/* Banner Section */}
             <motion.div
                 className="relative bg-cover bg-center h-64"
@@ -123,15 +123,15 @@ const CreateAssignment = () => {
             </motion.div>
 
             {/* Form Section */}
-            <div className=" py-12 text-black">
+            <div className="py-12">
                 <motion.div
-                    className="max-w-3xl mx-auto my-10 p-8 bg-white shadow-lg rounded-lg"
+                    className="max-w-3xl mx-auto my-10 p-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                 >
-                    <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                        <FaPlusCircle className="text-lime-600" />
+                    <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+                        <FaPlusCircle className="text-lime-600 dark:text-lime-400" />
                         Add A Assignment
                     </h2>
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -145,7 +145,7 @@ const CreateAssignment = () => {
                                 value={formData.title}
                                 onChange={handleChange}
                                 placeholder="Enter assignment title"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 required
                             />
                         </motion.div>
@@ -159,7 +159,7 @@ const CreateAssignment = () => {
                                 value={formData.description}
                                 onChange={handleChange}
                                 placeholder="Enter assignment details"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 required
                             />
                         </motion.div>
@@ -173,7 +173,7 @@ const CreateAssignment = () => {
                                 value={formData.marks}
                                 onChange={handleChange}
                                 placeholder="Enter assignment marks"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 required
                             />
                         </motion.div>
@@ -187,7 +187,7 @@ const CreateAssignment = () => {
                                 value={formData.thumbnailUrl}
                                 onChange={handleChange}
                                 placeholder="Enter image URL"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 required
                             />
                         </motion.div>
@@ -199,7 +199,7 @@ const CreateAssignment = () => {
                                 name="difficultyLevel"
                                 value={formData.difficultyLevel}
                                 onChange={handleChange}
-                                className="select select-bordered w-full"
+                                className="select select-bordered w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 required
                             >
                                 <option value="easy">Easy</option>
@@ -218,14 +218,14 @@ const CreateAssignment = () => {
                                 minDate={new Date()} // Prevent past dates
                                 isClearable
                                 placeholderText="Select a dueDate"
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                             />
                         </motion.div>
 
                         {/* Submit Button */}
                         <motion.button
                             type="submit"
-                            className="btn btn-primary w-full"
+                            className="btn btn-primary w-full bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-400"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 1, delay: 1.8 }}>

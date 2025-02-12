@@ -32,25 +32,27 @@ const Faq = () => {
     ];
 
     return (
-        <div className="py-12">
+        <div className="py-12 bg-gray-100 dark:bg-gray-900">
             <div className="max-w-6xl mx-auto px-6">
-                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">Frequently Asked Questions</h2>
+                <h2 className="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-200">
+                    Frequently Asked Questions
+                </h2>
                 <div className="space-y-4">
                     {faqs.map((faq, index) => (
-                        <div key={index} className="border border-gray-200 rounded-lg shadow-sm">
+                        <div key={index} className="border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm transition-all duration-300">
                             <button
-                                className="w-full flex justify-between items-center px-4 py-5 text-left text-gray-800 font-medium focus:outline-none"
+                                className="w-full flex justify-between items-center px-4 py-5 text-left text-gray-800 dark:text-gray-100 font-medium bg-white dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                                 onClick={() => toggleFAQ(index)}
                             >
                                 {faq.question}
                                 {openIndex === index ? (
-                                    <FaChevronUp className="text-gray-500" />
+                                    <FaChevronUp className="text-gray-600 dark:text-gray-400" />
                                 ) : (
-                                    <FaChevronDown className="text-gray-500" />
+                                    <FaChevronDown className="text-gray-600 dark:text-gray-400" />
                                 )}
                             </button>
                             {openIndex === index && (
-                                <div className="px-4 py-3 text-gray-600 bg-gray-50 border-t">
+                                <div className="px-4 py-3 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 transition-all">
                                     {faq.answer}
                                 </div>
                             )}
