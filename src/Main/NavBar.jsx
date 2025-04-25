@@ -24,10 +24,20 @@ const NavBar = () => {
       <NavLink to="/assignments" className="px-3 py-2 text-gray-200 hover:text-cyan-300 transition-colors duration-300">
         <li>Assignments</li>
       </NavLink>
+      
+      {/* Conditionally show links based on user login status */}
       {user ? (
-        <NavLink to="/pendingAssignment" className="px-3 py-2 text-gray-200 hover:text-cyan-300 transition-colors duration-300">
-          <li>Pending Assignments</li>
-        </NavLink>
+        <>
+          <NavLink to="/pendingAssignment" className="px-3 py-2 text-gray-200 hover:text-cyan-300 transition-colors duration-300">
+            <li>Pending Assignments</li>
+          </NavLink>
+          <NavLink to="/createAssignment" className="px-3 py-2 text-gray-200 hover:text-cyan-300 transition-colors duration-300">
+            <li>Create Assignment</li>
+          </NavLink>
+          <NavLink to="/mySubmissions" className="px-3 py-2 text-gray-200 hover:text-cyan-300 transition-colors duration-300">
+            <li>My Submissions</li>
+          </NavLink>
+        </>
       ) : (
         <NavLink to="/login" className="px-3 py-2 text-gray-200 hover:text-cyan-300 transition-colors duration-300">
           <li>Create Assignment</li>
@@ -43,7 +53,7 @@ const NavBar = () => {
     <>
       {/* Fixed Navbar */}
       <div className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-900 dark:to-black text-white shadow-md bg-opacity-90 py-4">
-        <div className="max-w-screen-xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-screen-2xl mx-auto px-6 flex items-center justify-between">
           {/* Left - Logo and Mobile Menu */}
           <div className="flex items-center">
             {/* Mobile Dropdown */}
@@ -62,7 +72,7 @@ const NavBar = () => {
               {/* Dropdown menu */}
               <ul
                 tabIndex={0}
-                className="menu text-white font-semibold px-4 menu-sm dropdown-content bg-gray-800 dark:bg-gray-800 dark:text-gray-300 text-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow-lg"
+                className="menu text-white font-semibold px-4 menu-sm dropdown-content bg-gray-800 dark:bg-gray-800 dark:text-gray-300  rounded-box z-[1] mt-3 w-52 p-2 shadow-lg"
               >
                 {links} {/* This is where we inject the links */}
               </ul>
@@ -70,7 +80,7 @@ const NavBar = () => {
 
             {/* Logo */}
             <div>
-              <NavLink to="/" className="text-2xl font-bold mr-3 text-gray-200 dark:text-white">
+              <NavLink to="/" className="text-xl md:text-2xl font-bold mr-3 text-gray-200 dark:text-white">
                 Online Group-Study
               </NavLink>
               {/* Dark Mode Toggle */}
@@ -78,7 +88,7 @@ const NavBar = () => {
                 onClick={toggleTheme}
                 className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 dark:text-white shadow-md transition duration-300"
               >
-                {isDarkMode ? <FaSun size={16} className="text-yellow-400" /> : <FaMoon size={16} className="text-gray-600" />}
+                {isDarkMode ? <FaSun size={14} className="text-yellow-400" /> : <FaMoon size={14} className="text-gray-600" />}
               </button>
             </div>
           </div>
@@ -104,17 +114,13 @@ const NavBar = () => {
                   onMouseEnter={(e) => e.currentTarget.classList.add("block")}
                   onMouseLeave={(e) => e.currentTarget.classList.remove("block")}
                 >
-                  <div className="py-1 text-gray-700 dark:text-gray-300" role="menu" aria-orientation="vertical">
-                    <NavLink to="/createAssignment" className="block px-4 py-2 text-gray-200 text-sm hover:bg-cyan-500 dark:hover:bg-gray-700">
-                      Create Assignment
-                    </NavLink>
-                    <NavLink to="/mySubmissions" className="block text-gray-200 px-4 py-2 text-sm hover:bg-cyan-500 dark:hover:bg-gray-700">
-                      My Submissions
-                    </NavLink>
-                    <button onClick={handleSignOut} className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-200 dark:hover:bg-gray-700">
-                      <FaSignOutAlt className="inline mr-2" /> Sign Out
-                    </button>
-                  </div>
+                  {/* Only show sign-out button */}
+                  <button
+                    onClick={handleSignOut}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-200 dark:hover:bg-gray-700"
+                  >
+                    <FaSignOutAlt className="inline mr-2" /> Sign Out
+                  </button>
                 </div>
               </div>
             ) : (

@@ -1,24 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { AuthContext } from '../AuthProvider/AuthProvider';
-import Spinner from '../../Spinner';
 
 const PendingAssignment = () => {
     const { user } = useContext(AuthContext);
     const subAssignments = useLoaderData();
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        setTimeout(() => setLoading(false), 2000); // Simulating API call
-    }, []);
 
     return (
         <div className="dark:bg-gray-900">
-            <div>
-                {loading ? <Spinner /> : <h1 className="text-center text-2xl"></h1>}
-            </div>
-
             {/* Banner Section */}
             <div
                 className="relative bg-cover bg-center h-64 dark:bg-gray-800"

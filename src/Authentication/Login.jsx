@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaGoogle, FaEyeSlash } from 'react-icons/fa';
-import { motion } from 'framer-motion'; // Import framer-motion
+import { motion } from 'framer-motion';
 import { auth } from '../__firebase.init';
 import { AuthContext } from '../Main/AuthProvider/AuthProvider';
 
@@ -17,7 +17,7 @@ const Login = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
         signInUser(email, password)
-            .then((result) => {
+            .then(() => {
                 navigate('/');
                 event.target.reset();
             })
@@ -39,14 +39,14 @@ const Login = () => {
 
     const handleGoogleSign = () => {
         signInWithGoogle()
-            .then((result) => {
+            .then(() => {
                 navigate('/');
             })
             .catch((error) => console.log(error.message));
     };
 
     return (
-        <div className="bg-gradient-to-r from-indigo-100 via-purple-200 to-indigo-100 min-h-screen flex flex-col items-center py-16">
+        <div className="bg-white dark:bg-gray-900 min-h-screen flex flex-col items-center py-16 transition-colors duration-500">
             {/* Banner Section */}
             <motion.div
                 className="text-center mb-12"
@@ -55,7 +55,7 @@ const Login = () => {
                 transition={{ duration: 1 }}
             >
                 <motion.h1
-                    className="text-5xl font-extrabold text-indigo-700"
+                    className="text-5xl font-extrabold text-indigo-700 dark:text-indigo-400"
                     initial={{ y: -50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.8 }}
@@ -63,7 +63,7 @@ const Login = () => {
                     Welcome Back!
                 </motion.h1>
                 <motion.p
-                    className="py-6 text-lg text-gray-700"
+                    className="py-6 text-lg text-gray-700 dark:text-gray-300"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5, duration: 1 }}
@@ -71,17 +71,17 @@ const Login = () => {
                     Log in to your account to access your personalized dashboard, manage your profile, and stay updated with the latest campaigns.
                 </motion.p>
                 <motion.p
-                    className="text-sm pb-10 text-gray-600"
+                    className="text-sm pb-10 text-gray-600 dark:text-gray-400"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 1 }}
                 >
                     Don’t have an account yet?{" "}
-                    <span className="text-indigo-600">
+                    <span className="text-indigo-600 dark:text-indigo-400">
                         <Link to="/signUp">Sign up now</Link>
                     </span>{" "}
                     to join our community and make a difference! Or back to{" "}
-                    <span className="text-indigo-600">
+                    <span className="text-indigo-600 dark:text-indigo-400">
                         <Link to="/">Home</Link>
                     </span>
                 </motion.p>
@@ -89,7 +89,7 @@ const Login = () => {
 
             {/* Login Form Section */}
             <motion.div
-                className="card bg-white w-full max-w-sm shadow-2xl rounded-xl mx-auto p-8"
+                className="card bg-white dark:bg-gray-800 w-full max-w-sm shadow-2xl rounded-xl mx-auto p-8 transition-colors duration-500"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 1.2 }}
@@ -103,14 +103,14 @@ const Login = () => {
                         transition={{ delay: 1.5, duration: 0.8 }}
                     >
                         <label className="label">
-                            <span className="label-text text-lg font-medium text-gray-600">Email</span>
+                            <span className="label-text text-lg font-medium text-gray-600 dark:text-gray-300">Email</span>
                         </label>
                         <input
                             type="email"
                             name="email"
                             ref={emailRef}
                             placeholder="Enter your email"
-                            className="input input-bordered w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
+                            className="input input-bordered w-full rounded-lg border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
                             required
                         />
                     </motion.div>
@@ -123,19 +123,19 @@ const Login = () => {
                         transition={{ delay: 1.7, duration: 0.8 }}
                     >
                         <label className="label">
-                            <span className="label-text text-lg font-medium text-gray-600">Password</span>
+                            <span className="label-text text-lg font-medium text-gray-600 dark:text-gray-300">Password</span>
                         </label>
                         <input
                             type={showPassword ? 'text' : 'password'}
                             name="password"
                             placeholder="Enter your password"
-                            className="input input-bordered w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
+                            className="input input-bordered w-full text-black rounded-lg border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4 bg-white dark:bg-gray-800  dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
                             required
                         />
 
                         <label
                             onClick={handleForgetBtn}
-                            className="label text-sm text-indigo-600 cursor-pointer hover:underline"
+                            className="label text-sm text-indigo-600 dark:text-indigo-400 cursor-pointer hover:underline"
                         >
                             <a href="#" className="label-text-alt link link-hover">
                                 Forgot password?
@@ -164,7 +164,7 @@ const Login = () => {
                 >
                     <button
                         onClick={handleGoogleSign}
-                        className="btn btn-ghost w-full mt-3 bg-slate-50 rounded-2xl mb-4 py-3 flex items-center justify-center text-indigo-600 border border-indigo-300"
+                        className="btn btn-ghost w-full mt-3 bg-slate-50 dark:bg-gray-700 rounded-2xl mb-4 py-3 flex items-center justify-center text-indigo-600 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-500"
                     >
                         <FaGoogle className="mr-3" /> Sign in with Google
                     </button>
@@ -173,12 +173,12 @@ const Login = () => {
                 {/* Password Visibility Toggle */}
                 <motion.button
                     onClick={() => setShowPassword(!showPassword)}
-                    className="btn btn-xs absolute right-10 bottom-[225px] text-indigo-600"
+                    className="btn btn-sm absolute right-10 bottom-[220px] bg-white text-indigo-600 dark:text-indigo-400 "
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 2.5, duration: 0.5 }}
                 >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    {showPassword ? <FaEyeSlash/> : <FaEye />}
                 </motion.button>
             </motion.div>
         </div>

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { auth } from '../__firebase.init';
-import { motion } from 'framer-motion'; // Import framer-motion
+import { motion } from 'framer-motion';
 import { AuthContext } from '../Main/AuthProvider/AuthProvider';
 
 const SignUp = () => {
@@ -18,7 +18,6 @@ const SignUp = () => {
     const password = event.target.password.value;
     const name = event.target.name.value;
     const photo = event.target.photo.value;
-    const userDetails = { email, name, photo };
 
     setErrMassage('');
 
@@ -28,28 +27,20 @@ const SignUp = () => {
     }
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
-
     if (!passwordRegex.test(password)) {
       setErrMassage('Password must have at least one uppercase, one lowercase, one number, and one special character');
       return;
     }
 
     createUser(email, password, name, photo)
-      .then((result) => {
+      .then(() => {
         toast.success('Successfully created account');
         event.target.reset();
         navigate('/');
-
-        const profile = {
-          displayName: name,
-          photoURL: photo,
-        };
-
+        const profile = { displayName: name, photoURL: photo };
         updateProfile(auth.currentUser, profile)
-          .then(() => {
-            console.log('User profile updated');
-          })
-          .catch((error) => console.log('Error updating user profile', error));
+          .then(() => console.log('User profile updated'))
+          .catch((error) => console.log('Error updating profile:', error));
       })
       .catch((error) => {
         console.log('Error:', error.message);
@@ -58,14 +49,12 @@ const SignUp = () => {
 
   const handleGoogleSign = () => {
     signInWithGoogle()
-      .then(() => {
-        navigate('/');
-      })
+      .then(() => navigate('/'))
       .catch((error) => console.log('Error:', error.message));
   };
 
   return (
-    <div className="bg-gradient-to-r from-indigo-100 via-purple-200 to-indigo-100 min-h-screen flex flex-col items-center py-16">
+    <div className="bg-gradient-to-r from-indigo-100 via-purple-200 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen flex flex-col items-center py-16">
       {/* Banner Section */}
       <motion.div
         className="text-center mb-12"
@@ -74,7 +63,7 @@ const SignUp = () => {
         transition={{ duration: 1 }}
       >
         <motion.h1
-          className="text-5xl font-extrabold text-indigo-700"
+          className="text-5xl font-extrabold text-indigo-700 dark:text-indigo-300"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -82,7 +71,7 @@ const SignUp = () => {
           Create an Account
         </motion.h1>
         <motion.p
-          className="py-6 text-lg text-gray-700"
+          className="py-6 text-lg text-gray-700 dark:text-gray-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
@@ -90,22 +79,21 @@ const SignUp = () => {
           Join us to make a positive impact! Fill in the details below to get started with your account.
         </motion.p>
         <motion.p
-          className="text-lg text-gray-700"
+          className="text-lg text-gray-700 dark:text-gray-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
         >
-          Already have an account? Go to{' '}
-          <span className="text-indigo-600">
-            <Link to="/login">Log in</Link>
-          </span>
-          .
+          Already have an account?{' '}
+          <Link to="/login" className="text-indigo-600 dark:text-indigo-400 underline">
+            Log in
+          </Link>
         </motion.p>
       </motion.div>
 
       {/* Registration Form Section */}
       <motion.div
-        className="card bg-white w-full max-w-sm shadow-2xl rounded-xl mx-auto p-8"
+        className="card bg-white dark:bg-gray-900 w-full max-w-sm shadow-2xl rounded-xl mx-auto p-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
@@ -119,13 +107,13 @@ const SignUp = () => {
             transition={{ delay: 1.5, duration: 0.8 }}
           >
             <label className="label">
-              <span className="label-text text-lg font-medium text-gray-600">Name</span>
+              <span className="label-text text-lg font-medium text-gray-600 dark:text-gray-300">Name</span>
             </label>
             <input
               type="text"
               name="name"
               placeholder="Enter your full name"
-              className="input input-bordered w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
+              className="input input-bordered w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
               required
             />
           </motion.div>
@@ -138,13 +126,13 @@ const SignUp = () => {
             transition={{ delay: 1.7, duration: 0.8 }}
           >
             <label className="label">
-              <span className="label-text text-lg font-medium text-gray-600">Photo URL</span>
+              <span className="label-text text-lg font-medium text-gray-600 dark:text-gray-300">Photo URL</span>
             </label>
             <input
               type="text"
               name="photo"
               placeholder="Enter photo URL"
-              className="input input-bordered w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
+              className="input input-bordered w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
               required
             />
           </motion.div>
@@ -157,13 +145,13 @@ const SignUp = () => {
             transition={{ delay: 1.9, duration: 0.8 }}
           >
             <label className="label">
-              <span className="label-text text-lg font-medium text-gray-600">Email</span>
+              <span className="label-text text-lg font-medium text-gray-600 dark:text-gray-300">Email</span>
             </label>
             <input
               type="email"
               name="email"
               placeholder="Enter your email"
-              className="input input-bordered w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
+              className="input input-bordered w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
               required
             />
           </motion.div>
@@ -176,24 +164,19 @@ const SignUp = () => {
             transition={{ delay: 2.1, duration: 0.8 }}
           >
             <label className="label">
-              <span className="label-text text-lg font-medium text-gray-600">Password</span>
+              <span className="label-text text-lg font-medium text-gray-600 dark:text-gray-300">Password</span>
             </label>
             <input
               type="password"
               name="password"
               placeholder="Create a password"
-              className="input input-bordered w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
+              className="input input-bordered w-full rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:outline-none py-2 px-4"
               required
             />
-            <label className="label text-sm text-indigo-600 cursor-pointer hover:underline">
-              <a href="#" className="label-text-alt link link-hover">
-                Forgot password?
-              </a>
-            </label>
           </motion.div>
 
           {/* Error Message */}
-          <div className="text-sm text-red-600">{errMassage}</div>
+          <div className="text-sm text-red-600 dark:text-red-400">{errMassage}</div>
 
           {/* Register Button */}
           <motion.div
@@ -216,7 +199,7 @@ const SignUp = () => {
         >
           <button
             onClick={handleGoogleSign}
-            className="btn btn-ghost w-full mt-3 bg-slate-50 rounded-2xl mb-4 py-3 flex items-center justify-center text-indigo-600 border border-indigo-300"
+            className="btn btn-ghost w-full mt-3 bg-slate-50 dark:bg-gray-700 rounded-2xl mb-4 py-3 flex items-center justify-center text-indigo-600 dark:text-indigo-300 border border-indigo-300 dark:border-indigo-500"
           >
             <FaGoogle className="mr-3" /> Sign up with Google
           </button>

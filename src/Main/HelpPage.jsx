@@ -2,8 +2,8 @@ import React from 'react';
 
 const HelpPage = () => {
   return (
-    <div className="container mx-auto px-4 py-8 text-gray-800 dark:text-gray-200">
-      <h1 className="text-3xl font-bold mb-6 text-center text-indigo-600 dark:text-indigo-400">How to Get Help</h1>
+    <div className="container pt-24 mx-auto px-4 py-8 text-gray-800 dark:text-gray-200">
+      <h1 className="text-3xl font-bold mb-20 text-center text-indigo-600 dark:text-indigo-400">How to Get Help</h1>
 
       <section className="mb-8 bg-indigo-50 dark:bg-indigo-900 p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">1. Explore FAQs</h2>
