@@ -90,71 +90,94 @@ const Assignments = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto p-8 shadow-lg rounded-lg bg-white dark:bg-gray-800">
-            {loading && <Spinner />}
-
-            {/* Banner Section */}
-            <div
-                className="relative bg-cover bg-center h-64 mb-8 rounded-lg shadow-md"
-                style={{ backgroundImage: "url('https://via.placeholder.com/1920x400?text=Assignments')" }}
-            >
-                <div className="absolute inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 rounded-lg"></div>
-                <div className="relative h-full flex items-center justify-center text-center text-white px-4">
-                    <h1 className="text-3xl md:text-5xl font-bold">Assignments</h1>
-                </div>
-            </div>
-
-            {/* Filter and Search Bar */}
-            <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                <select
-                    value={difficultyFilter}
-                    onChange={handleFilterChange}
-                    className="select select-bordered w-52 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-                >
-                    <option value="">All Levels</option>
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
-                <input
-                    type="text"
-                    placeholder="Search assignments..."
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                    className="input input-bordered px-4 py-2 w-full md:w-1/2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-                />
-            </div>
-
-            {/* Assignments Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {filteredAssignments.map((assignment) => (
-                    <div key={assignment._id} className="bg-white dark:bg-gray-700 shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 p-4">
-                        <img src={assignment.thumbnailUrl} alt={assignment.title} className="w-full h-48 object-cover rounded-t-lg" />
-                        <div className="p-4">
-                            <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">{assignment.title}</h2>
-                            <p className="text-gray-600 dark:text-gray-300 mb-2">Marks: {assignment.marks}</p>
-                            <p className="text-gray-600 dark:text-gray-300 mb-2">Difficulty: {assignment.difficultyLevel}</p>
-                            <div className="flex gap-2 mt-4 md:flex-wrap lg:flex-nowrap">
-                                <Link to={`/viewDetails/${assignment._id}`} className="w-full sm:w-auto">
-                                    <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-400 transition-colors w-full sm:w-auto">
-                                        View
-                                    </button>
-                                </Link>
-                                <Link to={`/updateAssignment/${assignment._id}`} className="w-full sm:w-auto">
-                                    <button className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 dark:hover:bg-yellow-400 transition-colors w-full sm:w-auto">
-                                        Update
-                                    </button>
-                                </Link>
-                                <button
-                                    onClick={() => handleDelete(assignment)}
-                                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 dark:hover:bg-red-400 transition-colors w-full sm:w-auto"
-                                >
-                                    Delete
-                                </button>
+        <div className="min-h-[calc(100vh-160px)] py-10 bg-gray-50 dark:bg-gray-900">
+            <div className="min-h-[calc(100vh-160px)] py-10 max-w-7xl mx-auto p-8 shadow-lg rounded-lg bg-white dark:bg-gray-800">
+                {/* Show spinner only when loading */}
+                {loading ? (
+                    <div className="flex justify-center items-center h-screen">
+                        <Spinner /> {/* Show loading spinner */}
+                    </div>
+                ) : (
+                    <div>
+                        {/* 🔹 Banner Section */}
+                        <div
+                            className="relative bg-cover bg-center h-72 md:h-80 lg:h-96 mb-10 rounded-lg shadow-md"
+                            style={{ backgroundImage: "url('https://via.placeholder.com/1920x400?text=Assignments')" }}
+                        >
+                            <div className="absolute inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 rounded-lg"></div>
+                            <div className="relative h-full flex flex-col items-center justify-center text-center text-white px-4">
+                                <h1 className="text-3xl md:text-5xl font-bold mb-2">Assignments</h1>
+                                <p className="text-base md:text-lg max-w-2xl">
+                                    Explore, update, or manage assignments easily. Filter by difficulty or search by keywords.
+                                </p>
                             </div>
                         </div>
+
+                        {/* 🔹 Filter & Search Bar */}
+                        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+                            <select
+                                value={difficultyFilter}
+                                onChange={handleFilterChange}
+                                className="select select-bordered w-full md:w-52 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                            >
+                                <option value="">All Levels</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+
+                            <input
+                                type="text"
+                                placeholder="Search assignments..."
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                                className="input input-bordered px-4 py-2 w-full md:w-1/2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                            />
+                        </div>
+
+                        {/* 🔹 Assignments Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {filteredAssignments.map((assignment) => (
+                                <div
+                                    key={assignment._id}
+                                    className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition duration-300"
+                                >
+                                    <img
+                                        src={assignment.thumbnailUrl}
+                                        alt={assignment.title}
+                                        className="w-full h-44 object-cover"
+                                    />
+                                    <div className="p-4">
+                                        <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                                            {assignment.title}
+                                        </h2>
+                                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Marks: {assignment.marks}</p>
+                                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">Difficulty: {assignment.difficultyLevel}</p>
+
+                                        <div className="flex flex-wrap gap-2">
+                                            <Link to={`/viewDetails/${assignment._id}`}>
+                                                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-400 transition-colors">
+                                                    View
+                                                </button>
+                                            </Link>
+                                            <Link to={`/updateAssignment/${assignment._id}`}>
+                                                <button className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 dark:hover:bg-yellow-400 transition-colors">
+                                                    Update
+                                                </button>
+                                            </Link>
+                                            <button
+                                                onClick={() => handleDelete(assignment)}
+                                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 dark:hover:bg-red-400 transition-colors"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );
