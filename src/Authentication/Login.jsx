@@ -3,6 +3,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaGoogle, FaEyeSlash } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import Swal from 'sweetalert2'; // SweetAlert2 import
 import { auth } from '../__firebase.init';
 import { AuthContext } from '../Main/AuthProvider/AuthProvider';
 
@@ -16,24 +17,54 @@ const Login = () => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
+
         signInUser(email, password)
             .then(() => {
                 navigate('/');
                 event.target.reset();
             })
-            .catch((error) => console.log(error.message));
+            .catch((error) => {
+                console.log(error.code);
+                if (error.code === 'auth/invalid-credential') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'User not found!',
+                        text: 'Please check your email and password or sign up for an account.',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed!',
+                        text: 'Something went wrong. Please try again later.',
+                    });
+                }
+            });
     };
 
     const handleForgetBtn = () => {
         const email = emailRef.current.value;
         if (!email) {
-            alert('Please enter a valid email');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Email Required!',
+                text: 'Please enter a valid email to reset your password.',
+            });
         } else {
             sendPasswordResetEmail(auth, email)
                 .then(() => {
-                    alert('Password reset email is sent to your email address');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Password Reset Email Sent!',
+                        text: 'Check your email to reset your password.',
+                    });
                 })
-                .catch((error) => console.log(error.message));
+                .catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: error.message,
+                    });
+                });
         }
     };
 
@@ -173,12 +204,12 @@ const Login = () => {
                 {/* Password Visibility Toggle */}
                 <motion.button
                     onClick={() => setShowPassword(!showPassword)}
-                    className="btn btn-sm absolute right-10 bottom-[220px] bg-white text-indigo-600 dark:text-indigo-400 "
+                    className="btn btn-sm absolute right-10 bottom-[220px] bg-white text-indigo-600 dark:text-indigo-400"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 2.5, duration: 0.5 }}
                 >
-                    {showPassword ? <FaEyeSlash/> : <FaEye />}
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </motion.button>
             </motion.div>
         </div>

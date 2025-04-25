@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from './AuthProvider/AuthProvider';
 import { toast } from 'react-toastify';
@@ -7,8 +7,8 @@ import Spinner from '../Spinner';
 
 const Assignments = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    // State for assignments and filters
     const [assignments, setAssignments] = useState([]);
     const [filteredAssignments, setFilteredAssignments] = useState([]);
     const [difficultyFilter, setDifficultyFilter] = useState('');
@@ -16,10 +16,9 @@ const Assignments = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 3000); // Simulating API call
+        setTimeout(() => setLoading(false), 3000);
     }, []);
 
-    // Fetch assignments
     useEffect(() => {
         fetch('https://assignment-11-server-side-nine.vercel.app/assignmentCollection')
             .then(res => res.json())
@@ -30,7 +29,6 @@ const Assignments = () => {
             .catch(err => console.error('Fetch error:', err));
     }, []);
 
-    // Handle Delete
     const handleDelete = (assignment) => {
         const { email, _id } = assignment;
 
@@ -44,7 +42,7 @@ const Assignments = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                if (user.email === email) {
+                if (user && user.email === email) {
                     fetch(`https://assignment-11-server-side-nine.vercel.app/assignmentCollection/${_id}`, {
                         method: "DELETE",
                     })
@@ -65,7 +63,6 @@ const Assignments = () => {
         });
     };
 
-    // Handle Difficulty Filter
     const handleFilterChange = (e) => {
         const value = e.target.value;
         setDifficultyFilter(value);
@@ -77,7 +74,6 @@ const Assignments = () => {
         setFilteredAssignments(filtered);
     };
 
-    // Handle Search
     const handleSearchChange = (e) => {
         const value = e.target.value.toLowerCase();
         setSearchQuery(value);
@@ -92,14 +88,12 @@ const Assignments = () => {
     return (
         <div className="min-h-[calc(100vh-160px)] py-10 bg-gray-50 dark:bg-gray-900">
             <div className="min-h-[calc(100vh-160px)] py-10 max-w-7xl mx-auto p-8 shadow-lg rounded-lg bg-white dark:bg-gray-800">
-                {/* Show spinner only when loading */}
                 {loading ? (
                     <div className="flex justify-center items-center h-screen">
-                        <Spinner /> {/* Show loading spinner */}
+                        <Spinner />
                     </div>
                 ) : (
                     <div>
-                        {/* 🔹 Banner Section */}
                         <div
                             className="relative bg-cover bg-center h-72 md:h-80 lg:h-96 mb-10 rounded-lg shadow-md"
                             style={{ backgroundImage: "url('https://via.placeholder.com/1920x400?text=Assignments')" }}
@@ -113,7 +107,7 @@ const Assignments = () => {
                             </div>
                         </div>
 
-                        {/* 🔹 Filter & Search Bar */}
+                        {/* Filter & Search */}
                         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
                             <select
                                 value={difficultyFilter}
@@ -135,7 +129,7 @@ const Assignments = () => {
                             />
                         </div>
 
-                        {/* 🔹 Assignments Grid */}
+                        {/* Assignment Cards */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             {filteredAssignments.map((assignment) => (
                                 <div
@@ -155,18 +149,37 @@ const Assignments = () => {
                                         <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">Difficulty: {assignment.difficultyLevel}</p>
 
                                         <div className="flex flex-wrap gap-2">
-                                            <Link to={`/viewDetails/${assignment._id}`}>
-                                                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-400 transition-colors">
-                                                    View
-                                                </button>
-                                            </Link>
-                                            <Link to={`/updateAssignment/${assignment._id}`}>
-                                                <button className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 dark:hover:bg-yellow-400 transition-colors">
-                                                    Update
-                                                </button>
-                                            </Link>
+                                            {/* View */}
                                             <button
-                                                onClick={() => handleDelete(assignment)}
+                                                onClick={() =>
+                                                    user
+                                                        ? navigate(`/viewDetails/${assignment._id}`)
+                                                        : (toast.warning("Please login first"), navigate('/login'))
+                                                }
+                                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-400 transition-colors"
+                                            >
+                                                View
+                                            </button>
+
+                                            {/* Update */}
+                                            <button
+                                                onClick={() =>
+                                                    user
+                                                        ? navigate(`/updateAssignment/${assignment._id}`)
+                                                        : (toast.warning("Please login first"), navigate('/login'))
+                                                }
+                                                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 dark:hover:bg-yellow-400 transition-colors"
+                                            >
+                                                Update
+                                            </button>
+
+                                            {/* Delete */}
+                                            <button
+                                                onClick={() =>
+                                                    user
+                                                        ? handleDelete(assignment)
+                                                        : (toast.warning("Please login first"), navigate('/login'))
+                                                }
                                                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 dark:hover:bg-red-400 transition-colors"
                                             >
                                                 Delete
